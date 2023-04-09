@@ -1,1 +1,1 @@
-export { PhraseList } from './phraseList.container';
+export { PhraseListContainer as PhraseList } from './phraseList.container';

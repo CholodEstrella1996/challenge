@@ -1,1 +1,1 @@
-export { PhraseComponent } from './phrase.component';
+export { PhraseComponent as Phrase } from './phrase.component';
