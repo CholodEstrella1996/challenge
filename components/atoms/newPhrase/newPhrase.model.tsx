@@ -1,6 +1,5 @@
 type Phrase = {
-    name:string
-    onAddPhrase:(text?:string) => void
+    onAddPhrase:(text:string) => void
 }
 
 export type {

@@ -1,34 +1,55 @@
-import {  Button, Paper, TextField } from '@mui/material'
-import { useRef } from 'react'
-import ReactDOM from 'react-dom'
+import { Box, Button, Fade, Modal, Paper, TextField } from '@mui/material'
+import { useRef, useState } from 'react'
 import { Phrase } from './newPhrase.model'
+import styles from './newPhrase.module.css'
 
-export const NewPhraseComponent = ({ name, onAddPhrase }: Phrase) => {
+export const NewPhraseComponent = ({ onAddPhrase }: Phrase) => {
   const textRef = useRef<HTMLInputElement | null>(null)
-
-  const handleCreate = () =>{
-    const text = textRef?.current?.querySelector("input")?.value
-    onAddPhrase(text)
-    
+  const [open, setOpen] = useState(false)
+  const handleOpen = () => {
+    setOpen(true)
   }
-const containerDiv = document.getElementById("containerDiv")
-if(!containerDiv) return null
+  const handleClose = () => {
+    setOpen(false)
+  }
 
+  const handleCreate = () => {
+    const text = textRef?.current?.querySelector('input')?.value
+    if (text) {
+      onAddPhrase(text)
+      setOpen(false)
+    }
+  }
 
-  return ReactDOM.createPortal (
-    <div >
-      <Paper
-        component="form"
-        sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400 }}
+  return (
+    <>
+      <Button variant="outlined" onClick={handleOpen} size="medium">
+        Crear Frase
+      </Button>
+      <Modal
+        className={styles.newPhrase__container}
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="child-modal-title"
+        aria-describedby="child-modal-description"
       >
-        <TextField
-          ref={textRef}
-          // sx={{ ml: 1, flex: 1 }}
-          placeholder="Crea"
-          // inputProps={{ 'aria-label': 'search google maps' }}
-        />
-      </Paper>
-      <Button onClick={handleCreate} >fdkdjskjsdkd</Button>
-    </div>, containerDiv
+        <Fade in={open}>
+          <Box sx={{ width: 200 }} className={styles.newPhrase__modalBox}>
+            <TextField
+              className={styles.newPhrase__modalName}
+              ref={textRef}
+              placeholder="Nombre"
+            />
+            <Button
+              variant="contained"
+              className={styles.newPhrase__modalButton}
+              onClick={handleCreate}
+            >
+              Crear
+            </Button>
+          </Box>
+        </Fade>
+      </Modal>
+    </>
   )
 }

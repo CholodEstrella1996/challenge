@@ -1,33 +1,39 @@
 import { useRef } from 'react'
 import { IconButton, InputBase, Paper, TextField } from '@mui/material'
-import SearchIcon from '@mui/icons-material/Search';
-
+import SearchIcon from '@mui/icons-material/Search'
+import ClearIcon from '@mui/icons-material/Clear'
+import styles from './inputSearch.module.css'
 import { filter } from './inputSearch.model'
 
-export const InputSearchComponent = ({ onSearch}: filter) => {
+export const InputSearchComponent = ({ onSearch }: filter) => {
   const inputRef = useRef<HTMLInputElement | null>(null)
 
-const handleSearch = () =>{
-  const text = inputRef?.current?.querySelector("input")?.value
-  onSearch(text)
-  
-}
+  const handleSearch = () => {
+    const text = inputRef?.current?.querySelector('input')?.value
+    onSearch(text)
+  }
+
+  const handleClear = () => {
+    const text = inputRef?.current?.querySelector('input')
+    if (text) text.value = ''
+    onSearch()
+  }
 
   return (
-    <Paper
-      component="form"
-      sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400 }}
-    >
-      <TextField
-        ref={inputRef}
-        // sx={{ ml: 1, flex: 1 }}
-        placeholder="Search"
-        // inputProps={{ 'aria-label': 'search google maps' }}
-      />
-      <IconButton onClick={handleSearch} type="button" sx={{ p: '10px' }} aria-label="search" >
-        <SearchIcon  />
+    <Paper className={styles.inputSearch__content} component="form">
+      <TextField ref={inputRef} placeholder="Buscar" />
+      <IconButton
+        onClick={handleSearch}
+        type="button"
+      >
+        <SearchIcon />
       </IconButton>
-     
+      <IconButton
+        onClick={handleClear}
+        type="button"
+      >
+        <ClearIcon />
+      </IconButton>
     </Paper>
   )
 }
