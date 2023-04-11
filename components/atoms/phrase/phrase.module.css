@@ -1,0 +1,11 @@
+.phrase__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  padding: 0.5rem;
+  background-color: white;
+  border-radius: 1rem;
+  cursor: pointer;
+}
