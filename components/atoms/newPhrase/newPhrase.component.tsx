@@ -1,6 +1,6 @@
 import { Box, Button, Fade, Modal, Paper, TextField } from '@mui/material'
 import { useRef, useState } from 'react'
-import { Phrase } from './newPhrase.model'
+import { Phrase } from './newphrase.model'
 import styles from './newPhrase.module.css'
 
 export const NewPhraseComponent = ({ onAddPhrase }: Phrase) => {
